@@ -1,0 +1,23 @@
+[project]
+name = "jev-python-demo"
+version = "0.1.0"
+description = "Minimal Jev + Vercel AI Gateway example"
+requires-python = ">=3.12"
+dependencies = [
+    "langgraph>=1.0,<2.0",
+    "python-dotenv>=1.2.3",
+    "requests>=2.32.0",
+    "typesafe-sdk>=0.7.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = [
+    "integration: tests that call external services",
+]

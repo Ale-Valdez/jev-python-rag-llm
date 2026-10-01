@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./app:/app/app
+
+    command:
+      [
+        "uv",
+        "run",
+        "python",
+        "-m",
+        "app.main"
+      ]
