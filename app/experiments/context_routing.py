@@ -2,12 +2,28 @@ from app.application.decision_context import DecisionContext
 from app.application.decision_questions import DECISION_QUESTIONS
 from app.jev.client import JevClient
 from app.jev.mapper import map_decision_result
-from app.experiments.data import VARIANTS, CASES, PREVIOUS_ANSWERS
+from app.experiments.data import VARIANTS, CASES, PREVIOUS_ANSWERS, CASES_TOOLS, CASE_2
 from app.domain.decisions import ChoiceDecision
 from collections import defaultdict
 
 print("DEBUG DECISION_QUESTIONS:", DECISION_QUESTIONS)
 RUNS = 3
+
+AVAILABLE_CAPABILITIES = """
+Available capabilities:
+
+RAG:
+- Search information in the document knowledge base.
+
+LLM:
+- Answer using the conversation and information already available.
+
+TOOLS:
+- Retrieve real-time external information.
+- Retrieve user-specific information.
+- Modify external state.
+- Execute external actions.
+"""
 
 def build_variant_context(case, variant_name):
     if variant_name == "F — previous_answer":
@@ -20,13 +36,24 @@ def build_variant_context(case, variant_name):
     return VARIANTS[variant_name]
 
 def evaluate_case(client: JevClient, case: dict) -> ChoiceDecision:
-    context = DecisionContext(
+    """ context = DecisionContext(
         current_message=case["message"],
         context={
             "previous_answer": case["previous_answer"],
+            "available_capabilities": AVAILABLE_CAPABILITIES,
         },
-    )
+    ) """
+    context_data = {
+        "available_capabilities": AVAILABLE_CAPABILITIES,
+    }
 
+    if "previous_answer" in case:
+        context_data["previous_answer"] = case["previous_answer"]
+
+    context = DecisionContext(
+        current_message=case["message"],
+        context=context_data,
+    )
     response = client.evaluate(
         context=context,
         questions=DECISION_QUESTIONS,
@@ -63,7 +90,7 @@ def run_experiment(client: JevClient, run_number: int):
 
     metrics = []
 
-    for case in CASES:
+    for case in CASE_2:
         result = evaluate_case(client, case)
 
         expected = case["expected"]

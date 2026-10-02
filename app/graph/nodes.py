@@ -1,12 +1,14 @@
 from app.application.decision_context import DecisionContext
 from app.application.decision_questions import DECISION_QUESTIONS
 from app.domain.decision_model import DecisionModel
+from app.domain.decision_policy import DecisionPolicy
 from app.graph.state import GraphState
 
 
 def decision_node(
     state: GraphState,
     decision_model: DecisionModel,
+    decision_policy: DecisionPolicy,
 ) -> dict:
     conversation = state["conversation"]
 
@@ -22,7 +24,9 @@ def decision_node(
         questions=DECISION_QUESTIONS,
     )
 
-    return {"decision": result}
+    resolved = decision_policy.resolve(result)
+    
+    return {"decision": result, "resolved_decision": resolved}
 
 
 def rag_node(state: GraphState) -> dict:

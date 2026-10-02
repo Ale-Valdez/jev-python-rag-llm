@@ -388,6 +388,271 @@ CASES = [
     },
 ]
 
+
+CASE_2 =[ 
+    # ============================================================
+    # RAG
+    # ============================================================
+
+    {
+        "name": "R1",
+        "message": "¿Qué dice el documento sobre las vacaciones?",
+        "expected": "rag",
+    },
+    {
+        "name": "R2",
+        "message": "Según el documento, ¿cuántos días de licencia corresponden?",
+        "expected": "rag",
+    },
+    {
+        "name": "R3",
+        "message": "¿Qué requisitos establece el documento para solicitar una licencia?",
+        "expected": "rag",
+    },
+    {
+        "name": "R4",
+        "message": "Compará lo que dice el documento sobre vacaciones y licencias.",
+        "expected": "rag",
+    },
+    {
+        "name": "R5",
+        "message": "¿Qué dice el documento sobre los feriados?",
+        "expected": "rag",
+    },
+    {
+        "name": "R6",
+        "message": "¿Cuál es el procedimiento descrito en el documento?",
+        "expected": "rag",
+    },
+    {
+        "name": "R7",
+        "message": "Según el documento, ¿quién puede solicitar esta licencia?",
+        "expected": "rag",
+    },
+    {
+        "name": "R8",
+        "message": "¿El documento menciona algún período de prueba?",
+        "expected": "rag",
+    },
+    {
+        "name": "R9",
+        "message": "¿Qué condiciones establece el documento para trabajar desde casa?",
+        "expected": "rag",
+    },
+    {
+        "name": "R10",
+        "message": "¿Podés buscar en el documento qué dice sobre horas extras?",
+        "expected": "rag",
+    },
+
+    # ============================================================
+    # LLM
+    # ============================================================
+
+    {
+        "name": "L1",
+        "message": "¿Qué significa la palabra resiliencia?",
+        "expected": "llm",
+    },
+    {
+        "name": "L2",
+        "message": "Explicame qué es una API REST.",
+        "expected": "llm",
+    },
+    {
+        "name": "L3",
+        "message": "Dame un ejemplo sencillo de una clase en Python.",
+        "expected": "llm",
+    },
+    {
+        "name": "L4",
+        "message": "¿Qué diferencia hay entre una lista y una tupla en Python?",
+        "expected": "llm",
+    },
+    {
+        "name": "L5",
+        "message": "¿Por qué usarías una cola de mensajes?",
+        "expected": "llm",
+    },
+    {
+        "name": "L6",
+        "message": "¿Qué ventajas tiene usar Docker?",
+        "expected": "llm",
+    },
+    {
+        "name": "L7",
+        "message": "¿Qué es una función pura?",
+        "expected": "llm",
+    },
+    {
+        "name": "L8",
+        "message": "Explicame qué significa idempotencia.",
+        "expected": "llm",
+    },
+    {
+        "name": "L9",
+        "message": "Resumí lo que acabás de explicarme.",
+        "previous_answer": (
+            "La idempotencia significa que realizar una misma operación "
+            "varias veces produce el mismo efecto que realizarla una sola vez."
+        ),
+        "expected": "llm",
+    },
+    {
+        "name": "L10",
+        "message": "¿Por qué una arquitectura por capas puede ser útil?",
+        "expected": "llm",
+    },
+
+    # ============================================================
+    # TOOLS
+    # ============================================================
+
+    {
+        "name": "T1",
+        "message": "¿Qué temperatura hace actualmente en Buenos Aires?",
+        "expected": "tools",
+    },
+    {
+        "name": "T2",
+        "message": "Reservame un turno para mañana a las 15.",
+        "expected": "tools",
+    },
+    {
+        "name": "T3",
+        "message": "Cancelá mi último pedido.",
+        "expected": "tools",
+    },
+    {
+        "name": "T4",
+        "message": "¿Cuánto dinero tengo disponible actualmente?",
+        "expected": "tools",
+    },
+    {
+        "name": "T5",
+        "message": "Transferí $50.000 a Juan.",
+        "expected": "tools",
+    },
+    {
+        "name": "T6",
+        "message": "¿Cuál es el estado de mi último pedido?",
+        "expected": "tools",
+    },
+    {
+        "name": "T7",
+        "message": "¿Qué turnos hay disponibles para mañana?",
+        "expected": "tools",
+    },
+    {
+        "name": "T8",
+        "message": "Cambiale la dirección de envío a mi último pedido.",
+        "expected": "tools",
+    },
+    {
+        "name": "T9",
+        "message": "Mandale un mensaje a Juan avisándole que llego tarde.",
+        "expected": "tools",
+    },
+    {
+        "name": "T10",
+        "message": "¿Qué hora es actualmente en Tokio?",
+        "expected": "tools",
+    },
+
+    # ============================================================
+    # AMBIGUOUS / CONTEXTUAL
+    # ============================================================
+
+    {
+        "name": "A1",
+        "message": "¿Y el otro?",
+        "previous_answer": (
+            "Hay dos alternativas disponibles, una para clientes nuevos "
+            "y otra para clientes existentes."
+        ),
+        "expected": "llm",
+    },
+    {
+        "name": "A2",
+        "message": "Hacé eso.",
+        "previous_answer": (
+            "Podemos modificar el sistema o reemplazar completamente "
+            "la implementación actual."
+        ),
+        "expected": "llm",
+    },
+    {
+        "name": "A3",
+        "message": "¿Cuál de los dos?",
+        "previous_answer": (
+            "Hay dos configuraciones posibles para el sistema."
+        ),
+        "expected": "llm",
+    },
+    {
+        "name": "A4",
+        "message": "Reservalo para mañana.",
+        "previous_answer": (
+            "Tenemos disponibles varios turnos para reservar."
+        ),
+        "expected": "tools",
+    },
+    {
+        "name": "A5",
+        "message": "Cancelalo.",
+        "previous_answer": (
+            "Tu último pedido es el número 4521 y figura como pendiente."
+        ),
+        "expected": "tools",
+    },
+]
+
+    # ============================================================
+    # TOOLS — requires external tools
+    # ============================================================
+CASES_TOOLS = [
+    {
+        "name": "T1",
+        "message": "¿Qué temperatura hace actualmente en Buenos Aires?",
+        "previous_answer": "",
+        "expected": "tools",
+    },
+    {
+        "name": "T2",
+        "message": "Reservame un turno para mañana a las 15.",
+        "previous_answer": "",
+        "expected": "tools",
+    },
+    {
+        "name": "T3",
+        "message": "Cancelá mi último pedido.",
+        "previous_answer": "",
+        "expected": "tools",
+    },
+    {
+        "name": "T4",
+        "message": "¿Qué es una temperatura alta?",
+        "previous_answer": "",
+        "expected": "llm",
+    },
+    {
+        "name": "T5",
+        "message": "¿Qué dice el documento sobre las vacaciones?",
+        "previous_answer": "",
+        "expected": "rag",
+    },
+    {
+        "name": "T6",
+        "message": "Hacé lo del otro.",
+        "previous_answer": (
+            "Hay dos alternativas disponibles, una para clientes nuevos "
+            "y otra para clientes existentes."
+        ),
+        "expected": "clarify",
+    },
+]
+
+
 VARIANTS = {
     "A — message": {},
     "B — last_action": {

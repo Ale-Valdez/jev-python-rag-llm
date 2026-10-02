@@ -1,6 +1,7 @@
 from typing import TypedDict
 
 from app.domain.decisions import DecisionResult
+from app.domain.resolved_decision import ResolvedDecision
 
 
 class ConversationState(TypedDict, total=False):
@@ -13,4 +14,5 @@ class ConversationState(TypedDict, total=False):
 class GraphState(TypedDict, total=False):
     conversation: ConversationState
     decision: DecisionResult
+    resolved_decision: ResolvedDecision
     route: str
